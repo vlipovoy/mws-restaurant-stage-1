@@ -2,7 +2,7 @@ let gulp = require('gulp');
 let responsive = require('gulp-responsive');
 
 gulp.task('responsive-images', function () {
-  createResponsiveImages ('img_dist');
+  createResponsiveImages ('dist/img');
 });
 
 const createResponsiveImages = function(output){

@@ -18,7 +18,7 @@ ul, li {
 	color: #333;
 }
 a {
-	color: orange;
+	color: #444;
 	text-decoration: none;
 }
 a:hover, a:focus {
@@ -41,12 +41,19 @@ article, aside, canvas, details, figcaption, figure, footer, header, hgroup, men
 }
 #footer {
   background-color: #444;
-  color: #aaa;
+  color: #fff;
   font-size: 8pt;
   letter-spacing: 1px;
   padding: 25px;
   text-align: center;
   text-transform: uppercase;
+}
+#footer a{
+  color: #fff;
+  font-weight: bold;
+}
+#footer a:hover {
+  color: #3397db;
 }
 /* ====================== Navigation ====================== */
 nav {
@@ -143,10 +150,10 @@ nav h1 a {
   max-width: 100%;
 }
 #restaurants-list li h1 {
-  color: #f18200;
+  color: #000;
   font-family: Arial,sans-serif;
   font-size: 14pt;
-  font-weight: 200;
+  font-weight: bold;
   letter-spacing: 0;
   line-height: 1.3;
   margin: 20px 0 10px;
@@ -157,7 +164,7 @@ nav h1 a {
   font-size: 11pt;
 }
 #restaurants-list li a {
-  border: 2px solid #f18200;
+  border: 1px solid #444;
   display: inline-block;
   font-size: 10pt;
   margin: 15px 0 0;
@@ -195,7 +202,7 @@ nav h1 a {
   width: 50%;
 }
 #restaurant-name {
-  color: #f18200;
+  color: #444;
   font-family: Arial,sans-serif;
   font-size: 20pt;
   font-weight: 200;

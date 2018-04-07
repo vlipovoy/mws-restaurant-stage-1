@@ -1,20 +1,26 @@
 let gulp = require('gulp');
+let del = require('del')
 let responsive = require('gulp-responsive');
+let dist = 'dist/img';
+
+gulp.task('clean-images', function() {
+    return del([dist])
+  })
 
 gulp.task('responsive-images', function () {
-  createResponsiveImages ('dist/img');
+  createResponsiveImages(dist);
 });
 
 const createResponsiveImages = function(output){
   return gulp.src('img/*.*')
     .pipe(responsive(
       {
-        '*.*':
+        '*.jpg':
         [
           {
               width: 320,
               rename: {
-                  suffix: '',
+                  suffix: '-320px',
                   extname: '.jpg',
               },
               format: 'jpeg',
@@ -22,7 +28,7 @@ const createResponsiveImages = function(output){
           {
               width: 640,
               rename: {
-                  suffix: '-medium',
+                  suffix: '-640px',
                   extname: '.jpg',
               },
               // format option can be omitted because
@@ -32,35 +38,10 @@ const createResponsiveImages = function(output){
           {
               width: 800,
               rename: {
-                  suffix: '-large',
+                  suffix: '-800px',
                   extname: '.jpg',
               },
               // Do not enlarge the output image if the input image are already less than the required dimensions.
-              withoutEnlargement: true,
-          },
-          {
-              // Convert images to the webp format
-              width: 320,
-              rename: {
-                  suffix: '',
-                  extname: '.webp',
-              },
-          },
-          {
-              // Convert images to the webp format
-              width: 640,
-              rename: {
-                  suffix: '-medium',
-                  extname: '.webp',
-              },
-          },
-          {
-              // Convert images to the webp format
-              width: 800,
-              rename: {
-                  suffix: '-large',
-                  extname: '.webp',
-              },
               withoutEnlargement: true,
           }
         ],
@@ -68,7 +49,7 @@ const createResponsiveImages = function(output){
       {
         // Global configuration for all images
         // The output quality for JPEG, WebP and TIFF output formats
-        quality: 80,
+        quality: 75,
         // Use progressive (interlace) scan for JPEG and PNG output
         progressive: true,
         // Strip all metadata

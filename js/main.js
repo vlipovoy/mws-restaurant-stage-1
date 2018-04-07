@@ -133,16 +133,50 @@ fillRestaurantsHTML = (restaurants = self.restaurants) => {
 }
 
 /**
+ * Create picture element.
+ */
+createPictureElement = (photograph) => {
+  const [name, type] = photograph.split('.');
+  const rootUrl = DBHelper.imageRootUrl();
+
+  const picture = document.createElement('picture');
+
+  const source320 = document.createElement('source');
+  const source640 = document.createElement('source');
+  const source800 = document.createElement('source');
+
+  const responsiveImage320 = `${rootUrl+name}-320px.${type}`
+  const responsiveImage640 = `${rootUrl+name}-640px.${type}`
+  const responsiveImage800 = `${rootUrl+name}-800px.${type}`
+
+  source320.srcset=`${responsiveImage320}`;
+  source320.media = '(min-width: 320px)';
+  picture.append(source320);
+
+  source640.srcset=`${responsiveImage640}`;
+  source640.media = '(min-width: 640px)';
+  picture.append(source640);
+
+  source800.srcset=`${responsiveImage800}`;
+  source800.media = '(min-width: 800px)';
+  picture.append(source800);
+
+  return picture;
+}
+
+/**
  * Create restaurant HTML.
  */
 createRestaurantHTML = (restaurant) => {
-  const li = document.createElement('li');
-
+  const li = document.createElement('li');  
   const image = document.createElement('img');
   image.className = 'restaurant-img';
   image.src = DBHelper.imageUrlForRestaurant(restaurant);
   image.alt = `Image of the ${restaurant.name} restaurant`;
-  li.append(image);
+
+  const picture = createPictureElement(restaurant.photograph);
+  picture.append(image);
+  li.append(picture);
 
   const name = document.createElement('h1');
   name.innerHTML = restaurant.name;

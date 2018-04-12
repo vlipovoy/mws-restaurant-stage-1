@@ -142,8 +142,8 @@ nav h1 a {
   text-align: center;
   display: grid;
   grid-template-columns: repeat(5, 1fr);
-  grid-gap: 3vw;
-  grid-row-gap: 6vw;
+  grid-gap: 48px;
+  grid-row-gap: 96px;
 }
 
 #restaurants-list .restaurant-img {

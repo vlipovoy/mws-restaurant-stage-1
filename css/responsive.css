@@ -1,0 +1,23 @@
+@media screen and (max-width: 1000px) {
+  #restaurants-list{
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media screen and (max-width: 750px) {
+  #restaurants-list{
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media screen and (max-width: 550px) {
+  #restaurants-list{
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media screen and (max-width: 458px) {
+  nav h1 {
+    font-size: 0.5em;
+  }
+}

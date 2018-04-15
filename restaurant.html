@@ -19,24 +19,22 @@
     <section id="map-container">
       <div id="map" role="application" aria-label="Google Map Api" aria-hidden="true" tabindex="-1"></div>
     </section>
-    <section id="restaurant-container">
-      <ul id="breadcrumb">
-        <li><a href="/">Home</a></li>
-      </ul>
-      <h1 id="restaurant-name"></h1>
-      <picture>
-        <source srcset="/dist/img/2-640px.jpg" media="(min-width: 800px)">
-        <source srcset="/dist/img/2-480px.jpg" media="(min-width: 640px)">
-        <source srcset="/dist/img/2-320px.jpg" media="(min-width: 480px)">
-        <img id="restaurant-img" src="/dist/img/2-320px.jpg" alt="">
-       </picture>
-      <p id="restaurant-cuisine"></p>
-      <p id="restaurant-address"></p>
-      <table id="restaurant-hours"></table>
-    </section>
-    <section id="reviews-container">
-      <ul id="reviews-list"></ul>
-    </section>
+    <div class="wrapper">
+        <ul id="breadcrumb">
+            <li><a href="/">Home</a></li>
+          </ul>
+      <section id="restaurant-container">
+      
+        <h1 id="restaurant-name"></h1>
+        <div id="picture-wrapper"></div>
+        <p id="restaurant-cuisine"></p>
+        <p id="restaurant-address"></p>
+        <table id="restaurant-hours"></table>
+      </section>
+      <section id="reviews-container">
+        <ul id="reviews-list"></ul>
+      </section>
+    </div>
   </main>
   <script type="application/javascript" charset="utf-8" src="js/dbhelper.js"></script>
   <script type="application/javascript" charset="utf-8" src="js/restaurant_info.js"></script>

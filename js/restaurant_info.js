@@ -45,34 +45,28 @@ fetchRestaurantFromURL = (callback) => {
   }
 }
 
-/**
- * Create picture element.
- */
+// /**
+//  * Create picture element.
+//  */
 createPictureElement = (photograph) => {
   const [name, type] = photograph.split('.');
   const rootUrl = DBHelper.imageRootUrl();
 
-  const picture = document.createElement('picture');
+  const picture = document.createElement('picture')
 
   const source320 = document.createElement('source');
-  const source640 = document.createElement('source');
-  const source800 = document.createElement('source');
-
+  const source480 = document.createElement('source');
+  
   const responsiveImage320 = `${rootUrl+name}-320px.${type}`
-  const responsiveImage640 = `${rootUrl+name}-640px.${type}`
-  const responsiveImage800 = `${rootUrl+name}-800px.${type}`
+  const responsiveImage480 = `${rootUrl+name}-480px.${type}`
 
   source320.srcset=`${responsiveImage320}`;
   source320.media = '(min-width: 320px)';
   picture.append(source320);
 
-  source640.srcset=`${responsiveImage640}`;
-  source640.media = '(min-width: 640px)';
-  picture.append(source640);
-
-  source800.srcset=`${responsiveImage800}`;
-  source800.media = '(min-width: 800px)';
-  picture.append(source800);
+  source480.srcset=`${responsiveImage480}`;
+  source480.media = '(min-width: 480px)';
+  picture.append(source480);
 
   return picture;
 }
@@ -87,11 +81,17 @@ fillRestaurantHTML = (restaurant = self.restaurant) => {
   const address = document.getElementById('restaurant-address');
   address.innerHTML = restaurant.address;
 
-  const image = document.getElementById('restaurant-img');
+  const image = document.createElement('img');
   const resolutionPrefix = '-320px';
-  image.className = 'restaurant-img'
-  image.alt = `Image of the ${restaurant.name} restaurant`;
+
+  image.className = 'restaurant-img';
   image.src = DBHelper.imageUrlForRestaurant(restaurant, resolutionPrefix);
+  image.alt = `Image of the ${restaurant.name} restaurant`;
+
+  const picture = createPictureElement(restaurant.photograph);
+  picture.append(image)
+  const wrapper = document.getElementById('picture-wrapper');
+  wrapper.append(picture)
 
   const cuisine = document.getElementById('restaurant-cuisine');
   cuisine.innerHTML = restaurant.cuisine_type;

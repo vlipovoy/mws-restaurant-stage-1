@@ -8,6 +8,10 @@
   #restaurants-list{
     grid-template-columns: repeat(3, 1fr);
   }
+  .wrapper{
+    flex-direction: column;
+    height: auto;
+  }
 }
 
 @media screen and (max-width: 550px) {

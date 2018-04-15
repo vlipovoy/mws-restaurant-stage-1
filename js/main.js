@@ -132,13 +132,13 @@ fillRestaurantsHTML = (restaurants = self.restaurants) => {
   addMarkersToMap();
 }
 
-createImageElementWithResolution = (photograph, resolution) => {
-  const source = document.createElement('source');
-  const responsiveImage320 = `${rootUrl+name}-320px.${type}`
-  source320.srcset=`${responsiveImage320}`;
-  source320.media = '(min-width: 320px)';
-  return source320;
-}
+// createImageElementWithResolution = (photograph, resolution) => {
+//   const source = document.createElement('source');
+//   const responsiveImage320 = `${rootUrl+name}-320px.${type}`
+//   source320.srcset=`${responsiveImage320}`;
+//   source320.media = '(min-width: 320px)';
+//   return source320;
+// }
 
 /**
  * Create restaurant HTML.

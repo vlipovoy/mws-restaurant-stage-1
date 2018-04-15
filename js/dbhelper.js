@@ -159,7 +159,7 @@ class DBHelper {
   static imageUrlForRestaurant(restaurant, resolutionPrefix) {
     const [name, type] = restaurant.photograph.split('.');
     const rootUrl = DBHelper.imageRootUrl();
-    const responsiveImage = `${rootUrl+name}-320px.${type}`
+    const responsiveImage = `${rootUrl+name+resolutionPrefix}.${type}`
     return responsiveImage;
   }
 

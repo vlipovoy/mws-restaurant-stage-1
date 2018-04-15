@@ -35,10 +35,6 @@ h1, h2, h3, h4, h5, h6 {
 article, aside, canvas, details, figcaption, figure, footer, header, hgroup, menu, nav, section {
 	display: block;
 }
-#maincontent {
-  background-color: #f3f3f3;
-  min-height: 100%;
-}
 #footer {
   background-color: #444;
   color: #fff;
@@ -74,9 +70,8 @@ nav h1 a {
   text-transform: uppercase;
 }
 #breadcrumb {
-    padding: 10px 40px 16px;
+    padding: 40px 0px 16px 0px;
     list-style: none;
-    background-color: #eee;
     font-size: 17px;
     margin: 0;
     width: calc(50% - 80px);
@@ -183,7 +178,7 @@ nav h1 a {
   width: 100%;
   z-index: 1000;
 }
-.inside #map-container {
+/* .inside #map-container {
   background: blue none repeat scroll 0 0;
   height: 87%;
   position: fixed;
@@ -195,12 +190,12 @@ nav h1 a {
   background-color: #ccc;
   height: 100%;
   width: 100%;
-}
-.inside #footer {
+} */
+/* .inside #footer {
   bottom: 0;
   position: absolute;
   width: 50%;
-}
+} */
 #restaurant-name {
   color: #444;
   font-family: Arial,sans-serif;
@@ -233,7 +228,7 @@ nav h1 a {
 #restaurant-container, #reviews-container {
   border-bottom: 1px solid #d9d9d9;
   border-top: 1px solid #fff;
-  padding: 140px 40px 30px;
+  padding: 0px 40px 30px 40px;
   width: 50%;
 }
 #reviews-container {
@@ -252,7 +247,7 @@ nav h1 a {
 }
 #reviews-list li {
   background-color: #fff;
-    border: 2px solid #f3f3f3;
+  border: 2px solid #f3f3f3;
   display: block;
   list-style-type: none;
   margin: 0 0 30px;

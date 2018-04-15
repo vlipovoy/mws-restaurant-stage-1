@@ -26,9 +26,9 @@ const createResponsiveImages = function(output){
               format: 'jpeg',
           },
           {
-              width: 640,
+              width: 480,
               rename: {
-                  suffix: '-640px',
+                  suffix: '-480px',
                   extname: '.jpg',
               },
               // format option can be omitted because
@@ -36,9 +36,9 @@ const createResponsiveImages = function(output){
               // format: 'jpeg'
           },
           {
-              width: 800,
+              width: 640,
               rename: {
-                  suffix: '-800px',
+                  suffix: '-640px',
                   extname: '.jpg',
               },
               // Do not enlarge the output image if the input image are already less than the required dimensions.

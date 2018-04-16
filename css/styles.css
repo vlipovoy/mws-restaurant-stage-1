@@ -3,8 +3,8 @@
 
 body,td,th,p{
 	font-family: Arial, Helvetica, sans-serif;
-	font-size: 10pt;
-	color: #333;
+	font-size: 12pt;
+	color: #000;
 	line-height: 1.5;
 }
 body {
@@ -14,8 +14,8 @@ body {
 }
 ul, li {
 	font-family: Arial, Helvetica, sans-serif;
-	font-size: 10pt;
-	color: #333;
+	font-size: 12pt;
+	color: #000;
 }
 a {
 	color: #444;
@@ -70,10 +70,10 @@ nav h1 a {
   text-transform: uppercase;
 }
 
-.wrapper{
+/* .wrapper{
   display: flex;
   height: 100vh;
-}
+} */
 
 #breadcrumb {
     padding: 40px 0px 16px 0px;
@@ -184,6 +184,16 @@ nav h1 a {
   width: 100%;
   z-index: 1000;
 }
+.parent{
+  display: flex;
+}
+
+#picture-wrapper{
+  width: 50%;
+}
+#table-wrapper{
+  width: 50%;
+}
 /* .inside #map-container {
   background: blue none repeat scroll 0 0;
   height: 87%;
@@ -204,7 +214,7 @@ nav h1 a {
 } */
 #restaurant-name {
   font-family: Arial,sans-serif;
-  font-size: 30pt;
+  font-size: 26pt;
   font-weight: 400;
   letter-spacing: 0;
   margin: 15px 0 30px;
@@ -215,12 +225,13 @@ nav h1 a {
   width: 90%;
 }
 #restaurant-address {
-  font-size: 12pt;
+  font-size: 16pt;
+  font-weight: bold;
   margin: 10px 0px;
 }
 #restaurant-cuisine {
-  background-color: #333;
-  color: #ddd;
+  background-color: #252831;
+  color: #fff;
   font-size: 12pt;
   font-weight: 300;
   letter-spacing: 10px;
@@ -236,13 +247,13 @@ nav h1 a {
   padding: 0px 40px 30px 40px;
   /* width: 50%; */
 }
-#restaurant-container{
+/* #restaurant-container{
   flex: 0 0 auto;
-}
+} */
 #reviews-container {
   padding: 30px 40px 80px;
-  flex: 1 1 auto;
-  overflow: auto;
+  /* flex: 1 1 auto;
+  overflow: auto; */
 }
 #reviews-container h2 {
   font-size: 20pt;
@@ -256,18 +267,35 @@ nav h1 a {
 }
 #reviews-list li {
   background-color: #fff;
-  border: 2px solid #f3f3f3;
+  border: 1px solid #c3c3c3;
   display: block;
   list-style-type: none;
   margin: 0 0 30px;
   overflow: hidden;
   padding: 0 20px 20px;
   position: relative;
-  width: 85%;
 }
-#reviews-list li p {
-  margin: 0 0 10px;
+
+#reviews-list li p:nth-child(1) {
+  font-size: 14pt;
 }
+
+#reviews-list li p:nth-child(2) {
+  font-style: italic;
+}
+
+#reviews-list li p:nth-child(3) {
+  font-weight: bold;
+}
+
+#restaurant-hours {
+  width: 100%
+}
+
 #restaurant-hours td {
-  color: #666;
+  width: 50%
+}
+
+#restaurant-hours tr td {
+  font-size: 16pt;
 }

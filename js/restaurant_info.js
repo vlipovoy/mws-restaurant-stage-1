@@ -54,18 +54,18 @@ createPictureElement = (photograph) => {
 
   const picture = document.createElement('picture')
 
-  const source320 = document.createElement('source');
   const source480 = document.createElement('source');
+  const source640 = document.createElement('source');
   
-  const responsiveImage320 = `${rootUrl+name}-320px.${type}`
   const responsiveImage480 = `${rootUrl+name}-480px.${type}`
+  const responsiveImage640 = `${rootUrl+name}-640px.${type}`
 
-  source320.srcset=`${responsiveImage320}`;
-  source320.media = '(min-width: 320px)';
-  picture.append(source320);
+  source640.srcset=`${responsiveImage640}`;
+  source640.media = '(min-width: 1360px)';
+  picture.append(source640);
 
   source480.srcset=`${responsiveImage480}`;
-  source480.media = '(min-width: 480px)';
+  source480.media = '(min-width: 1045px)';
   picture.append(source480);
 
   return picture;

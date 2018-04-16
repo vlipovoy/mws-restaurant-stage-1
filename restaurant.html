@@ -20,16 +20,20 @@
       <div id="map" role="application" aria-label="Google Map Api" aria-hidden="true" tabindex="-1"></div>
     </section>
     <div class="wrapper">
-        <ul id="breadcrumb">
-            <li><a href="/">Home</a></li>
-          </ul>
       <section id="restaurant-container">
-      
+        <ul id="breadcrumb">
+          <li><a href="/">Home</a></li>
+        </ul>
         <h1 id="restaurant-name"></h1>
-        <div id="picture-wrapper"></div>
-        <p id="restaurant-cuisine"></p>
-        <p id="restaurant-address"></p>
-        <table id="restaurant-hours"></table>
+        <div class="parent">
+          <div id="picture-wrapper"></div>
+          <div id="table-wrapper">
+            <p id="restaurant-cuisine"></p>
+            <p id="restaurant-address"></p>
+            <table id="restaurant-hours"></table>
+          </div>
+        </div>
+        
       </section>
       <section id="reviews-container">
         <ul id="reviews-list"></ul>

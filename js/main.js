@@ -132,14 +132,6 @@ fillRestaurantsHTML = (restaurants = self.restaurants) => {
   addMarkersToMap();
 }
 
-// createImageElementWithResolution = (photograph, resolution) => {
-//   const source = document.createElement('source');
-//   const responsiveImage320 = `${rootUrl+name}-320px.${type}`
-//   source320.srcset=`${responsiveImage320}`;
-//   source320.media = '(min-width: 320px)';
-//   return source320;
-// }
-
 /**
  * Create restaurant HTML.
  */
@@ -172,41 +164,6 @@ createRestaurantHTML = (restaurant) => {
 
   return li
 }
-
-/**
- * Create restaurant HTML.
- */
-/*createRestaurantHTML = (restaurant) => {
-  const li = document.createElement('li');  
-  const image = document.createElement('img');
-  image.className = 'restaurant-img';
-  image.src = DBHelper.imageUrlForRestaurant(restaurant);
-  image.alt = `Image of the ${restaurant.name} restaurant`;
-
-  const picture = createPictureElement(restaurant.photograph);
-  picture.append(image);
-  li.append(picture);
-
-  const name = document.createElement('h1');
-  name.innerHTML = restaurant.name;
-  li.append(name);
-
-  const neighborhood = document.createElement('p');
-  neighborhood.innerHTML = restaurant.neighborhood;
-  li.append(neighborhood);
-
-  const address = document.createElement('p');
-  address.innerHTML = restaurant.address;
-  li.append(address);
-
-  const more = document.createElement('a');
-  more.innerHTML = 'View Details';
-  more.href = DBHelper.urlForRestaurant(restaurant);
-  li.append(more)
-
-  return li
-}
-*/
 
 /**
  * Add markers for current restaurants to the map.

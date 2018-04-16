@@ -1,6 +1,10 @@
 @media screen and (max-width: 1044px) {
   #restaurant-hours tr td{
-    font-size: 14pt;
+    font-size: 12pt;
+  }
+  #picture-wrapper {
+    width: 320px;
+    margin: 0 auto;
   }
 }
 
@@ -21,15 +25,8 @@
   #table-wrapper {
     width: 100%;
   }
-  #picture-wrapper {
-    width: 320px;
-    margin: 0 auto;
-  }
   #restaurant-address {
     font-size: 14pt;
-  }
-  #restaurant-hours tr td{
-    font-size: 12pt;
   }
   #restaurant-name {
     font-size: 20pt;

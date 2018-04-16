@@ -129,11 +129,11 @@ nav h1 a {
   background-color: white;
   border: 1px solid #fff;
   font-family: Arial,sans-serif;
-  font-size: 11pt;
+  font-size: 12pt;
   height: 35px;
   letter-spacing: 0;
   margin: 15px 10px;
-  width: calc((100vw - 44px)/2);
+  width: calc((100vw - 45px)/2);
 }
 
 /* ====================== Restaurant Listing ====================== */
@@ -162,7 +162,7 @@ nav h1 a {
 }
 #restaurants-list p {
   margin: 0;
-  font-size: 11pt;
+  font-size: 12pt;
 }
 #restaurants-list li a {
   border: 1px solid #444;

@@ -69,6 +69,10 @@ nav h1 a {
   letter-spacing: 10px;
   text-transform: uppercase;
 }
+nav.breadcrumb {
+  height: 0%;
+  background-color: #fff;
+}
 
 #breadcrumb {
     padding: 40px 0px 16px 0px;

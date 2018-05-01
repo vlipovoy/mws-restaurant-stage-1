@@ -2,10 +2,7 @@
   #restaurant-hours tr td{
     font-size: 12pt;
   }
-  #picture-wrapper {
-    width: 320px;
-    margin: 0 auto;
-  }
+
 }
 
 @media screen and (max-width: 1000px) {
@@ -31,6 +28,13 @@
   #restaurant-name {
     font-size: 20pt;
   }
+  #picture-wrapper {
+    width: 100%;
+    margin: 0 auto;
+  }
+  img {
+    width: 100%;
+  }
 }
 
 @media screen and (max-width: 550px) {
@@ -43,4 +47,5 @@
   nav h1 {
     font-size: 0.3em;
   }
+ 
 }

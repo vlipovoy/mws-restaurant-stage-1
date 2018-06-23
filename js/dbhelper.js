@@ -9,26 +9,22 @@ class DBHelper {
    */
   static get DATABASE_URL() {
     const port = 8000 // Change this to your server port
-    return `/data/restaurants.json`;
+    return `http://localhost:1338/restaurants`;
   }
 
   /**
    * Fetch all restaurants.
    */
   static fetchRestaurants(callback) {
-    let xhr = new XMLHttpRequest();
-    xhr.open('GET', DBHelper.DATABASE_URL);
-    xhr.onload = () => {
-      if (xhr.status === 200) { // Got a success response from server!
-        const json = JSON.parse(xhr.responseText);
-        const restaurants = json.restaurants;
-        callback(null, restaurants);
-      } else { // Oops!. Got an error from server.
-        const error = (`Request failed. Returned status of ${xhr.status}`);
-        callback(error, null);
-      }
-    };
-    xhr.send();
+    fetch(DBHelper.DATABASE_URL)
+    .then((resp) => resp.json()) // Transform the data into json
+    .then(function(data) {
+      callback(null, data);
+    })
+    .catch(function(error) {
+      const error = (`Request failed. Returned status of ${error}`);
+      callback(error, null);
+    });
   }
 
   /**
@@ -91,7 +87,7 @@ class DBHelper {
       if (error) {
         callback(error, null);
       } else {
-        let results = restaurants
+        let results = restaurants;
         if (cuisine != 'all') { // filter by cuisine
           results = results.filter(r => r.cuisine_type == cuisine);
         }
@@ -157,9 +153,9 @@ class DBHelper {
    * Restaurant image URL.
    */
   static imageUrlForRestaurant(restaurant, resolutionPrefix) {
-    const [name, type] = restaurant.photograph.split('.');
+    const name = restaurant.photograph;
     const rootUrl = DBHelper.imageRootUrl();
-    const responsiveImage = `${rootUrl+name+resolutionPrefix}.${type}`
+    const responsiveImage = `${rootUrl+name+resolutionPrefix}.jpg`
     return responsiveImage;
   }
 

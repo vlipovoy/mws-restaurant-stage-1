@@ -49,16 +49,15 @@ fetchRestaurantFromURL = (callback) => {
 //  * Create picture element.
 //  */
 createPictureElement = (photograph) => {
-  const [name, type] = photograph.split('.');
   const rootUrl = DBHelper.imageRootUrl();
 
   const picture = document.createElement('picture')
 
   const source480 = document.createElement('source');
   const source640 = document.createElement('source');
-  
-  const responsiveImage480 = `${rootUrl+name}-480px.${type}`
-  const responsiveImage640 = `${rootUrl+name}-640px.${type}`
+
+  const responsiveImage480 = `${rootUrl+photograph}-480px.jpg`
+  const responsiveImage640 = `${rootUrl+photograph}-640px.jpg`
 
   source640.srcset=`${responsiveImage640}`;
   source640.media = '(min-width: 1360px)';

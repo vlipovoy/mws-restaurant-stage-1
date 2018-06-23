@@ -5,6 +5,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="theme-color" content="#FFFFFF"/>
+  <link rel="manifest" href="/manifest.webmanifest">
   <link rel="stylesheet" src="//normalize-css.googlecode.com/svn/trunk/normalize.css" />
   <link rel="stylesheet" href="css/styles.css" type="text/css">
   <link rel="stylesheet" href="css/responsive.css" type="text/css">
@@ -36,23 +38,9 @@
       </nav>
     </section>
   </main>
-  <script>
-    if ('serviceWorker' in navigator){
-    navigator.serviceWorker
-    .register('/js/sw.js')
-    .then(function(registration){
-      console.log("SW registration completed");
-    }).catch(function(err){
-      console.log("SW registration failed", err);
-    });
-    } else {
-      console.log("SW is not supported in this browser");
-    };
-  </script>
   <script type="application/javascript" charset="utf-8" src="js/dbhelper.js"></script>
   <script type="application/javascript" charset="utf-8" src="js/main.js"></script>
   <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyByasZQ9-yzyEwm5d6KEsI_X3ToqSrAiCA&libraries=places&callback=initMap"></script>
-
   <footer id="footer">
     <script>document.write(new Date().getFullYear());</script>
     <a href="/"><strong>Restaurant Reviews</strong></a> All Rights Reserved.

@@ -40,7 +40,7 @@ const cacheFiles = [
 ]
 
 // Install event
-self.addEventListener('install', function(event){
+addEventListener('install', function(event){
 	console.log("Service Worker installed");
 	event.waitUntil(
 		caches.open(cacheName)
@@ -52,7 +52,7 @@ self.addEventListener('install', function(event){
 });
 
 // Activate event
-self.addEventListener('activate', function(event){
+addEventListener('activate', function(event){
 	console.log("Service worker activated");
 	event.waitUntil(
 		caches.keys().then(function(cacheNames){
@@ -67,10 +67,11 @@ self.addEventListener('activate', function(event){
 });
 
 // Fetch event
-self.addEventListener('fetch', function(event){
+addEventListener('fetch', function(event){
 	event.respondWith(
 		caches.match(event.request).then(function(response){
 			return response || fetch(event.request);
 		})
 	);
 });
+

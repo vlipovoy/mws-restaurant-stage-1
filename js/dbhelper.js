@@ -155,7 +155,7 @@ class DBHelper {
   static imageUrlForRestaurant(restaurant, resolutionPrefix) {
     const name = restaurant.photograph;
     const rootUrl = DBHelper.imageRootUrl();
-    const responsiveImage = `${rootUrl+name+resolutionPrefix}.jpg`
+    const responsiveImage = `${rootUrl+name+resolutionPrefix}.webp`
     return responsiveImage;
   }
 

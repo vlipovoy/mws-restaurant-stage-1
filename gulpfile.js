@@ -21,7 +21,7 @@ const createResponsiveImages = function(output){
               width: 320,
               rename: {
                   suffix: '-320px',
-                  extname: '.jpg',
+                  extname: '.webp',
               },
               format: 'jpeg',
           },
@@ -29,7 +29,7 @@ const createResponsiveImages = function(output){
               width: 480,
               rename: {
                   suffix: '-480px',
-                  extname: '.jpg',
+                  extname: '.webp',
               },
               // format option can be omitted because
               // format of output image is detected from new filename
@@ -39,7 +39,7 @@ const createResponsiveImages = function(output){
               width: 640,
               rename: {
                   suffix: '-640px',
-                  extname: '.jpg',
+                  extname: '.webp',
               },
               // Do not enlarge the output image if the input image are already less than the required dimensions.
               withoutEnlargement: true,

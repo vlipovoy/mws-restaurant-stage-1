@@ -56,8 +56,8 @@ createPictureElement = (photograph) => {
   const source480 = document.createElement('source');
   const source640 = document.createElement('source');
 
-  const responsiveImage480 = `${rootUrl+photograph}-480px.jpg`
-  const responsiveImage640 = `${rootUrl+photograph}-640px.jpg`
+  const responsiveImage480 = `${rootUrl+photograph}-480px.webp`
+  const responsiveImage640 = `${rootUrl+photograph}-640px.webp`
 
   source640.srcset=`${responsiveImage640}`;
   source640.media = '(min-width: 1360px)';

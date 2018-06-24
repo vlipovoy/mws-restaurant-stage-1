@@ -8,11 +8,13 @@ var markers = []
  * Fetch neighborhoods and cuisines as soon as the page is loaded.
  */
 document.addEventListener('DOMContentLoaded', (event) => {
- // const dbPromise = openDatabase();
+  DBHelper.openDatabase()
   registerServiceWorker();
   fetchNeighborhoods();
   fetchCuisines();
 });
+
+
 
 /**
  * Register Service Worker

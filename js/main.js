@@ -8,30 +8,10 @@ var markers = []
  * Fetch neighborhoods and cuisines as soon as the page is loaded.
  */
 document.addEventListener('DOMContentLoaded', (event) => {
-  DBHelper.openDatabase()
-  registerServiceWorker();
   fetchNeighborhoods();
   fetchCuisines();
+  initMap();
 });
-
-
-
-/**
- * Register Service Worker
- */
-registerServiceWorker = () => {
-  if ('serviceWorker' in navigator) {
-    // Register a service worker hosted at the root of the
-    // site using the default scope.
-    navigator.serviceWorker.register('../sw.js').then(function(registration) {
-      console.log('Service worker registration succeeded:', registration);
-    }).catch(function(error) {
-      console.log('Service worker registration failed:', error);
-    });
-  } else {
-    console.log('Service workers are not supported.');
-  }
-}
 
 /**
  * Fetch all neighborhoods and set their HTML.
@@ -161,9 +141,36 @@ createRestaurantHTML = (restaurant) => {
   const image = document.createElement('img');
   const resolutionPrefix = '-320px';
 
-  image.className = 'restaurant-img';
-  image.src = DBHelper.imageUrlForRestaurant(restaurant, resolutionPrefix);
   image.alt = `Image of the ${restaurant.name} restaurant`;
+
+  // Lazy load images
+  const config = {
+    threshold: 0.1
+  };
+
+  let observer;
+
+  const loadImage = image => {
+    image.className = 'restaurant-img';
+    image.src = DBHelper.imageUrlForRestaurant(restaurant, resolutionPrefix);
+  }
+
+  const onChange = (changes, observer) => {
+    changes.forEach(change => {
+      if (change.intersectionRatio > 0) {
+        loadImage(change.target);
+        observer.unobserve(change.target);
+      }
+    })
+  }
+  if ('IntersectionObserver' in window) {
+    observer = new IntersectionObserver(onChange, config);
+    observer.observe(image);
+  } else {
+    console.log('IntersectionObserver is not supported');
+    loadImage(image);
+  }
+
   li.append(image);
 
   const name = document.createElement('h2');

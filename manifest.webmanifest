@@ -1,9 +1,16 @@
 {
-  "name": "Restaurant Application",
-  "short_name": "Restaurant App",
-  "start_url": "/",
+  "name": "mws-restaurant-app",
+  "short_name": "Restaurants",
+  "description": "Mobile Web Specialist Certification Course",
+  "lang": "en-US",
+  "start_url": "/index.html",
   "display": "standalone",
-  "background_color": "#FFFFFF",
-  "description": "Restaurant Application.",
-  "theme_color": "#FFFFFF"
+  "orientation": "natural",
+  "background_color": "#fdfdfd",
+  "theme_color": "#fdfdfd",
+  "icons": [{
+    "src": "dist/img/icon-512x512.png",
+    "sizes": "512x512",
+    "type": "image/png"
+  }]
 }

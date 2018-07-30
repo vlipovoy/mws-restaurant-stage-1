@@ -1,6 +1,10 @@
 let restaurant;
 var map;
 
+document.addEventListener('DOMContentLoaded', (event) => {
+  initMap();
+});
+
 /**
  * Initialize Google map, called from HTML.
  */

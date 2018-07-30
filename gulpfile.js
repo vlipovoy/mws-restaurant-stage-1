@@ -45,6 +45,8 @@ const createResponsiveImages = function(output){
               withoutEnlargement: true,
           }
         ],
+        '*.png':
+        []
       },
       {
         // Global configuration for all images

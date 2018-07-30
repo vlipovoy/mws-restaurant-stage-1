@@ -270,3 +270,58 @@ nav.breadcrumb {
 #restaurant-hours tr td:nth-child(2) {
   text-align: right;
 }
+
+
+@media screen and (max-width: 1044px) {
+  #restaurant-hours tr td{
+    font-size: 12pt;
+  }
+
+}
+
+@media screen and (max-width: 1000px) {
+  #restaurants-list{
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media screen and (max-width: 750px) {
+  #restaurants-list{
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .parent{
+    flex-direction: column;
+    height: auto;
+  }
+  #table-wrapper {
+    width: 100%;
+  }
+  #restaurant-address {
+    font-size: 14pt;
+  }
+  #restaurant-name {
+    font-size: 20pt;
+  }
+  #picture-wrapper {
+    width: 100%;
+    margin: 0 auto;
+  }
+  img {
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 550px) {
+  #restaurants-list{
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media screen and (max-width: 458px) {
+  nav h1 {
+    font-size: 0.3em;
+  }
+  #restaurants-list{
+    grid-template-columns: repeat(1, 1fr);
+  }
+}

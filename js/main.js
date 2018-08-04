@@ -8,9 +8,9 @@ var markers = []
  * Fetch neighborhoods and cuisines as soon as the page is loaded.
  */
 document.addEventListener('DOMContentLoaded', (event) => {
+  initMap();
   fetchNeighborhoods();
   fetchCuisines();
-  initMap();
 });
 
 /**
@@ -71,18 +71,39 @@ fillCuisinesHTML = (cuisines = self.cuisines) => {
 /**
  * Initialize Google map, called from HTML.
  */
-window.initMap = () => {
-  let loc = {
-    lat: 40.722216,
-    lng: -73.987501
-  };
-  self.map = new google.maps.Map(document.getElementById('map'), {
-    zoom: 12,
-    center: loc,
-    scrollwheel: false
-  });
+// window.initMap = () => {
+//   let loc = {
+//     lat: 40.722216,
+//     lng: -73.987501
+//   };
+//   self.map = new google.maps.Map(document.getElementById('map'), {
+//     zoom: 12,
+//     center: loc,
+//     scrollwheel: false
+//   });
+//   updateRestaurants();
+// }
+
+/**
+ * Initialize leaflet map, called from HTML.
+ */
+initMap = () => {
+  self.newMap = L.map('map', {
+        center: [40.722216, -73.987501],
+        zoom: 12,
+        scrollWheelZoom: false
+      });
+  L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.jpg70?access_token={mapboxToken}', {
+    mapboxToken: 'pk.eyJ1IjoibXJwdW1wa2luZyIsImEiOiJjamoyNXUzcDIwenpyM2tsZm03MDJnOHFqIn0.K5wTgEieIuewCzBwoLVGRw',
+    maxZoom: 18,
+    attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, ' +
+      '<a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
+      'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+    id: 'mapbox.streets'
+  }).addTo(newMap);
   updateRestaurants();
 }
+
 
 /**
  * Update page and map for current restaurants.
@@ -133,6 +154,17 @@ fillRestaurantsHTML = (restaurants = self.restaurants) => {
   addMarkersToMap();
 }
 
+changeFavElementClass = (el, fav) => {
+  if (!fav) {
+    el.classList.add('is_favourite');
+    el.setAttribute('aria-label', 'mark as favorite');
+  } else {
+    el.classList.remove('is_favourite');
+    el.setAttribute('aria-label', 'remove as favorite');
+
+  }
+}
+
 /**
  * Create restaurant HTML.
  */
@@ -177,6 +209,19 @@ createRestaurantHTML = (restaurant) => {
   name.innerHTML = restaurant.name;
   li.append(name);
 
+  const favourite = document.createElement('button');
+  favourite.innerHTML = '❤';
+  favourite.classList.add("favourite_btn");
+  //change fav status on click
+  favourite.onclick = function() {
+    const isFavourite = !restaurant.is_favorite;
+    DBHelper.updateFavouriteStatus(restaurant.id, isFavourite);
+    restaurant.is_favorite = !restaurant.is_favorite
+    changeFavElementClass(favourite, restaurant.is_favorite)
+  };
+  changeFavElementClass(favourite, restaurant.is_favorite)
+  li.append(favourite);
+
   const neighborhood = document.createElement('p');
   neighborhood.innerHTML = restaurant.neighborhood;
   li.append(neighborhood);
@@ -188,10 +233,24 @@ createRestaurantHTML = (restaurant) => {
   const more = document.createElement('a');
   more.innerHTML = 'View Details';
   more.href = DBHelper.urlForRestaurant(restaurant);
-  li.append(more)
+  li.append(more);
 
-  return li
+  return li;
 }
+
+/**
+ * Add markers for current restaurants to the map.
+ */
+// addMarkersToMap = (restaurants = self.restaurants) => {
+//   restaurants.forEach(restaurant => {
+//     // Add marker to the map
+//     const marker = DBHelper.mapMarkerForRestaurant(restaurant, self.map);
+//     google.maps.event.addListener(marker, 'click', () => {
+//       window.location.href = marker.url
+//     });
+//     self.markers.push(marker);
+//   });
+// }
 
 /**
  * Add markers for current restaurants to the map.
@@ -199,10 +258,12 @@ createRestaurantHTML = (restaurant) => {
 addMarkersToMap = (restaurants = self.restaurants) => {
   restaurants.forEach(restaurant => {
     // Add marker to the map
-    const marker = DBHelper.mapMarkerForRestaurant(restaurant, self.map);
-    google.maps.event.addListener(marker, 'click', () => {
-      window.location.href = marker.url
-    });
+    const marker = DBHelper.mapMarkerForRestaurant(restaurant, self.newMap);
+    marker.on("click", onClick);
+    function onClick() {
+      window.location.href = marker.options.url;
+    }
     self.markers.push(marker);
   });
+
 }

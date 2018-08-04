@@ -1,10 +1,7 @@
-const cacheName = "mws-restaurant-cache-v1";
+const cacheName = "mws-restaurant-cache-v15";
 const cacheFiles = [
 	'/',
 	'/restaurant.html',
-  '/js/main.js',
-  '/js/dbhelper.js',
-	'/js/restaurant_info.js',
 	'/css/styles.css',
 	'/dist/img/1-320px.webp',
 	'/dist/img/1-480px.webp',
@@ -45,7 +42,8 @@ addEventListener('install', function(event){
 		caches.open(cacheName)
 		.then(function(cache){
 			console.log("Caching files");
-			return cache.addAll(cacheFiles);
+			return cache.addAll(cacheFiles)
+			.then(self.skipWaiting());
 		})
 	)
 });
@@ -67,9 +65,20 @@ addEventListener('activate', function(event){
 
 // Fetch event
 addEventListener('fetch', function(event){
+	const url = event.request.url.split(/[?#]/)[0];
+
 	event.respondWith(
-		caches.match(event.request).then(function(response){
-			return response || fetch(event.request);
+		caches.match(event.request).then(cachedResponse => {
+			if (cachedResponse) {
+				return cachedResponse;
+			}
+			return caches.open(cacheName).then(cache => {
+				return fetch(event.request).then(response => {
+					return cache.put(url, response.clone()).then(() => {
+						return response;
+					});
+				});
+			});
 		})
 	);
 });

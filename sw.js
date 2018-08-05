@@ -1,7 +1,6 @@
-const cacheName = "mws-restaurant-cache-v15";
+const cacheName = "mws-restaurant-cache-v20";
 const cacheFiles = [
 	'/',
-	'/restaurant.html',
 	'/css/styles.css',
 	'/dist/img/1-320px.webp',
 	'/dist/img/1-480px.webp',
@@ -66,7 +65,6 @@ addEventListener('activate', function(event){
 // Fetch event
 addEventListener('fetch', function(event){
 	const url = event.request.url.split(/[?#]/)[0];
-
 	event.respondWith(
 		caches.match(event.request).then(cachedResponse => {
 			if (cachedResponse) {

@@ -3,10 +3,6 @@
  */
 class DBHelper {
 
-  //constructor(){
-    //this._dbPromise = null;
-  //}
-
   /**
    * Database URL.
    * Change this to restaurants.json file location on your server.
@@ -42,8 +38,8 @@ class DBHelper {
     return DBHelper.openDatabase().then(function(db){
       if(!db) return;
 
-      var tx = db.transaction('restaurants', 'readwrite');
-      var store = tx.objectStore('restaurants');
+      let tx = db.transaction('restaurants', 'readwrite');
+      let store = tx.objectStore('restaurants');
       restaurants.forEach(function (restaurant) {
           store.put(restaurant);
       });
@@ -51,13 +47,37 @@ class DBHelper {
     });
   }
 
+  static populateReviewObjectStore(reviews){
+    return DBHelper.openDatabase().then(function(db){
+      if(!db) return;
+
+      let tx = db.transaction('reviews', 'readwrite');
+      let store = tx.objectStore('reviews');
+      reviews.forEach(function (review) {
+          store.put(review);
+      });
+      return tx.complete.then(() => Promise.resolve(reviews));
+    });
+  }
+
+
   static getRestaurantsFromDB(){
     return DBHelper.openDatabase().then(function(db){
       if(!db) return;
 
-      var tx = db.transaction('restaurants');
-      var store = tx.objectStore('restaurants');
+      let tx = db.transaction('restaurants');
+      let store = tx.objectStore('restaurants');
       return store.getAll();
+    });
+  }
+
+  static getReviewFromDB(restaurantId){
+    return DBHelper.openDatabase().then(function(db){
+      if(!db) return;
+      let tx = db.transaction('reviews');
+      let store = tx.objectStore('reviews');
+      const indexId = store.index('restaurant');
+      return indexId.getAll(restaurantId);
     });
   }
 
@@ -69,6 +89,18 @@ class DBHelper {
           return DBHelper.populateRestaurantObjectStore(restaurants);
       }).catch(function(error) {
         callback(error, null);
+      });
+  }
+
+  static getReviewsFromNetwork(restaurantId){
+    return fetch(`${DBHelper.DATABASE_URL}/reviews/?restaurant_id=${restaurantId}`)
+      .then(function(response){
+          return response.json();
+      }).then(reviews => {
+          return DBHelper.populateReviewObjectStore(reviews);
+      }).catch(function(error) {
+        console.log(error);
+        //callback(error, null);
       });
   }
 
@@ -265,8 +297,7 @@ class DBHelper {
       "comments": review.comments,
       "restaurant_id": parseInt(review.restaurant_id)
     };
-    console.log('Sending review: ', reviewSend);
-    var fetch_options = {
+    let fetch_options = {
       method: 'POST',
       body: JSON.stringify(reviewSend),
       headers: new Headers({
@@ -324,6 +355,17 @@ class DBHelper {
               restaurantsStore.put(restaurant);
             });
         })
+    })
+  }
+
+  static fetchReviewByRestaurantId(restaurantId) {
+    return DBHelper.getReviewFromDB(restaurantId)
+    .then((reviews) => {
+      if (reviews.length) {
+        return reviews;
+      } else {
+        return DBHelper.getReviewsFromNetwork(restaurantId);
+      }
     })
   }
 

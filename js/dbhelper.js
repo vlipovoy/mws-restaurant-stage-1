@@ -50,7 +50,7 @@ class DBHelper {
   static populateReviewObjectStore(reviews){
     return DBHelper.openDatabase().then(function(db){
       if(!db) return;
-
+      console.log(reviews);
       let tx = db.transaction('reviews', 'readwrite');
       let store = tx.objectStore('reviews');
       reviews.forEach(function (review) {
@@ -74,7 +74,7 @@ class DBHelper {
   static getReviewFromDB(restaurantId){
     return DBHelper.openDatabase().then(function(db){
       if(!db) return;
-      let tx = db.transaction('reviews');
+      let tx = db.transaction('reviews').objectStore('reviews');
       let store = tx.objectStore('reviews');
       const indexId = store.index('restaurant');
       return indexId.getAll(restaurantId);
@@ -309,7 +309,7 @@ class DBHelper {
       if (contentType && contentType.indexOf('application/json') !== -1) {
         return response.json();
       } else { return 'API call successfull'}})
-    .then((data) => {console.log(`Fetch successful!`)})
+    .then((data) => {console.log(data)})
     .catch(error => console.log('error:', error));
   }
 
@@ -331,9 +331,7 @@ class DBHelper {
         if (offline_obj.name === 'addReview') {
           DBHelper.addReview(offline_obj.data);
         }
-
         console.log('LocalState: data sent to api');
-
         localStorage.removeItem('data');
         console.log(`Local Storage: ${offline_obj.object_type} removed`);
       }
@@ -359,15 +357,46 @@ class DBHelper {
   }
 
   static fetchReviewByRestaurantId(restaurantId) {
-    return DBHelper.getReviewFromDB(restaurantId)
-    .then((reviews) => {
-      if (reviews.length) {
-        return reviews;
-      } else {
-        return DBHelper.getReviewsFromNetwork(restaurantId);
-      }
-    })
+    return fetch(`${DBHelper.DATABASE_URL}/reviews/?restaurant_id=${restaurantId}`)
+      .then(response => response.json())
+      .then(reviews => {
+        console.log(reviews);
+        this.openDatabase()
+          .then(db => {
+            if (!db) return;
+
+            let tx = db.transaction('reviews', 'readwrite');
+            const store = tx.objectStore('reviews');
+            if (Array.isArray(reviews)) {
+              reviews.forEach(function(review) {
+                store.put(review);
+              });
+            } else {
+              store.put(reviews);
+            }
+          });
+        return Promise.resolve(reviews);
+      })
+      .catch(error => {
+        console.log(error);
+        return DBHelper.getReviewFromDB(restaurantId)
+          .then((storedReviews) => {
+            console.log(`Stored reviews: ${storedReviews}`);
+            return Promise.resolve(storedReviews);
+          })
+      });
   }
+
+  // static fetchReviewByRestaurantId(restaurantId) {
+  //   return DBHelper.getReviewFromDB(restaurantId)
+  //   .then((reviews) => {
+  //     if (reviews.length) {
+  //       return reviews;
+  //     } else {
+  //       return DBHelper.getReviewsFromNetwork(restaurantId);
+  //     }
+  //   })
+  // }
 
 }
 

@@ -180,7 +180,7 @@ fillReviewsHTML = (reviews) => {
 }
 
 // Form validation & submission
-addReviewTest = () => {
+addReview = () => {
   event.preventDefault();
   // Getting the data from the form
   let restaurantId = getParameterByName('id');

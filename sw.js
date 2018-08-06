@@ -1,7 +1,10 @@
-const cacheName = "mws-restaurant-cache-v20";
+const cacheName = "mws-restaurant-cache-v26";
 const cacheFiles = [
 	'/',
 	'/css/styles.css',
+	'/js/dbhelper.js',
+  '/js/main.js',
+  '/js/restaurant_info.js',
 	'/dist/img/1-320px.webp',
 	'/dist/img/1-480px.webp',
 	'/dist/img/1-640px.webp',
